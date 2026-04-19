@@ -1,0 +1,36 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Root-level .env
+.env
+
+# Backend — BOTH cases covered because the folder is Server/ (capital S)
+# On Linux (case-sensitive), only the exact case matches.
+Server/.env
+Server/node_modules/
+
+# Also cover lowercase just in case folder is renamed
+server/.env
+server/node_modules/
+
+# Frontend
+client/.env
