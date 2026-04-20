@@ -1,5 +1,5 @@
 // middleware/auth.js  — renamed from Auth.js to auth.js (fixes Linux MODULE_NOT_FOUND crash)
-const jwt  = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const protect = async (req, res, next) => {
@@ -12,7 +12,7 @@ const protect = async (req, res, next) => {
       return res.status(401).json({ success: false, message: 'Access denied. No token provided.' });
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user    = await User.findById(decoded.id).select('-password');
+    const user = await User.findById(decoded.id).select('-password');
     if (!user || !user.isActive) {
       return res.status(401).json({ success: false, message: 'User no longer exists or is inactive.' });
     }
