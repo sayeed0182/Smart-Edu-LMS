@@ -136,17 +136,17 @@ io.on('connection', (socket) => {
 
 const startServer = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
+    await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 5000,
     });
-    console.log('✅ MongoDB connected successfully');
+    console.log('✅ MongoDB Atlas connected successfully using MONGODB_URI');
     server.listen(PORT, () => {
       console.log(`🚀 Edu-Smart server running on http://localhost:${PORT}`);
       console.log(`📋 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🌐 CORS: accepting localhost, 127.0.0.1, and any 192.168.x.x / 10.x.x.x`);
     });
   } catch (err) {
-    console.error('❌ MongoDB connection failed:', err.message);
+    console.error('❌ MongoDB Atlas connection failed:', err.message);
     process.exit(1);
   }
 };
