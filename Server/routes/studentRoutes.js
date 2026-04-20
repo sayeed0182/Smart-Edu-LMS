@@ -1,7 +1,7 @@
 // routes/studentRoutes.js
 const express = require('express');
 const Student = require('../models/Student');
-const { protect, restrictTo } = require('../middleware/auth');
+const { protect, restrictTo } = require('../middleware/Auth');
 const { getSocketIO } = require('../socket');
 
 const router = express.Router();
