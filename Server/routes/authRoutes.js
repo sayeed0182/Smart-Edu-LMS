@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const Student = require('../models/Student');
-const { protect } = require('../middleware/Auth');
+const { protect } = require('../middleware/auth');
 
 const router = express.Router();
 
