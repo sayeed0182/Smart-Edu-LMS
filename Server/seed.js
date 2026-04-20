@@ -3,10 +3,10 @@
 
 require('dotenv').config({ path: '../.env' });
 const mongoose = require('mongoose');
-const User    = require('./models/User'); 
+const User = require('./models/User');
 const Student = require('./models/Student');
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/edu-smart';
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/edu-smart';
 
 const seedData = async () => {
   try {
@@ -20,10 +20,10 @@ const seedData = async () => {
 
     // ── Create Faculty User ──────────────────────────────
     const faculty = await User.create({
-      name:       'Dr. Sarah Johnson',
-      email:      'faculty@edu-smart.com',
-      password:   'faculty123',
-      role:       'Faculty',
+      name: 'Dr. Sarah Johnson',
+      email: 'faculty@edu-smart.com',
+      password: 'faculty123',
+      role: 'Faculty',
       department: 'Computer Science',
     });
     console.log('👩‍🏫 Faculty created:', faculty.email);
@@ -31,15 +31,15 @@ const seedData = async () => {
     // ── Create Student Users + Profiles ─────────────────
     const studentsData = [
       {
-        user: { name: 'mohammed sayeed',  email: 'mohammedsayeed@gmail.com',  password: 'student123', role: 'Student', department: 'Computer Science' },
+        user: { name: 'mohammed sayeed', email: 'mohammedsayeed@gmail.com', password: 'student123', role: 'Student', department: 'Computer Science' },
         profile: {
           studentId: 'STU-2024-001', department: 'Computer Science',
           semester: 6, batch: '2022-2026',
           attendancePercentage: 85,
           marks: [
-            { subject: 'Data Structures',   ca1: 18, ca2: 17, midterm: 26, endterm: 42 },
+            { subject: 'Data Structures', ca1: 18, ca2: 17, midterm: 26, endterm: 42 },
             { subject: 'Operating Systems', ca1: 16, ca2: 15, midterm: 24, endterm: 38 },
-            { subject: 'Database Systems',  ca1: 19, ca2: 18, midterm: 27, endterm: 44 },
+            { subject: 'Database Systems', ca1: 19, ca2: 18, midterm: 27, endterm: 44 },
           ],
         },
       },
@@ -50,9 +50,9 @@ const seedData = async () => {
           semester: 6, batch: '2022-2026',
           attendancePercentage: 68,
           marks: [
-            { subject: 'Data Structures',   ca1: 12, ca2: 14, midterm: 20, endterm: 30 },
+            { subject: 'Data Structures', ca1: 12, ca2: 14, midterm: 20, endterm: 30 },
             { subject: 'Operating Systems', ca1: 10, ca2: 11, midterm: 18, endterm: 28 },
-            { subject: 'Database Systems',  ca1: 13, ca2: 12, midterm: 21, endterm: 32 },
+            { subject: 'Database Systems', ca1: 13, ca2: 12, midterm: 21, endterm: 32 },
           ],
         },
       },
@@ -63,16 +63,16 @@ const seedData = async () => {
           semester: 6, batch: '2022-2026',
           attendancePercentage: 92,
           marks: [
-            { subject: 'Data Structures',   ca1: 20, ca2: 19, midterm: 29, endterm: 48 },
+            { subject: 'Data Structures', ca1: 20, ca2: 19, midterm: 29, endterm: 48 },
             { subject: 'Operating Systems', ca1: 18, ca2: 20, midterm: 28, endterm: 46 },
-            { subject: 'Database Systems',  ca1: 19, ca2: 20, midterm: 30, endterm: 49 },
+            { subject: 'Database Systems', ca1: 19, ca2: 20, midterm: 30, endterm: 49 },
           ],
         },
       },
     ];
 
     for (const { user: userData, profile } of studentsData) {
-      const user    = await User.create(userData);
+      const user = await User.create(userData);
       const student = await Student.create({ ...profile, name: userData.name, email: userData.email, userId: user._id });
       user.studentId = student._id;
       await user.save();

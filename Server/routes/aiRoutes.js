@@ -1,12 +1,12 @@
 const express = require('express');
-const axios   = require('axios');
+const axios = require('axios');
 const { protect } = require('../middleware/auth');
 
 const router = express.Router();
 router.use(protect);
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 const SYSTEM_PROMPT = `You are EduBot, a friendly and knowledgeable AI study assistant for SMART-EDU, 
 an education management system for engineering college students in India.
