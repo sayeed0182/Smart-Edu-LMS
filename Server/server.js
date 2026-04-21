@@ -17,11 +17,12 @@ const { setSocketIO }    = require('./socket');
 const app  = express();
 const PORT = process.env.PORT || 5001;
 
-// ✅ CORS: Accept localhost, 127.0.0.1, and any 192.168.x.x / 10.x.x.x LAN IP
+// ✅ CORS: Accept Vercel frontend, localhost, 127.0.0.1, and LAN IPs
 // This lets you open the app from your phone or another PC on the same WiFi.
 const isAllowedOrigin = (origin) => {
   if (!origin) return true; // allow non-browser requests (curl, Postman)
-  if (process.env.CLIENT_URL) return origin === process.env.CLIENT_URL;
+  if (origin === 'https://smart-edu-lms.vercel.app') return true;
+  if (process.env.CLIENT_URL && origin === process.env.CLIENT_URL) return true;
   return /^http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+):\d+$/.test(origin);
 };
 
